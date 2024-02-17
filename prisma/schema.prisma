@@ -13,16 +13,16 @@ model Product{
   id Int @default(autoincrement()) @id
   name String 
   description String?
-  categories ProductCategory[]  
+  categories Category[]  
 }
 
 
-model ProductCategory {
+model Category {
   id                 Int               @default(autoincrement()) @id
   categoryName      String
-  parentCategory     ProductCategory?  @relation("ChildCategories", fields: [parentCategoryId], references: [id])
+  parentCategory     Category?  @relation("ChildCategories", fields: [parentCategoryId], references: [id])
   parentCategoryId   Int?
-  childCategories    ProductCategory[] @relation("ChildCategories")
+  childCategories    Category[] @relation("ChildCategories")
   
   products Product[]
 }

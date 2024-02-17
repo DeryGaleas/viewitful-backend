@@ -2,7 +2,45 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type CategoryType {
+  id: Int!
+  categoryName: String!
+  parentCategory: CategoryType
+  childCategories: [CategoryType!]!
+}
+
+type ProductType {
+  id: Int!
+  name: String!
+  description: String
+  categories: [CategoryType!]!
+}
+
 type Query {
-  hello: String!
-  product(id: Int!): String!
+  product(id: Int!): ProductType!
+  category(id: Int!): CategoryType!
+}
+
+type Mutation {
+  createProduct(input: CreateProductInput!): ProductType!
+  updateProduct(input: UpdateProductInput!): ProductType!
+  deleteProduct(id: Int!): ProductType!
+  createCategory(input: CreateCategoryInput!): CategoryType!
+  updateCategory(input: UpdateProductInput!): CategoryType!
+  deleteCategory(id: Int!): CategoryType!
+}
+
+input CreateProductInput {
+  name: String!
+  description: String
+}
+
+input UpdateProductInput {
+  name: String
+  description: String
+  id: Int!
+}
+
+input CreateCategoryInput {
+  categoryName: String!
 }
